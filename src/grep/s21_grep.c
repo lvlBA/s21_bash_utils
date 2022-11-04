@@ -1,5 +1,7 @@
 #include "s21_grep.h"
 
+#include <pcre.h>
+
 int main(int argc, char *argv[]) {
   opt options = {0};
   if (argc > 1) {
@@ -244,31 +246,33 @@ void option_f(char **argv, struct options *opt, int count, char *bufer,
   size_t len = 0, len2 = 0;
   FILE *file2 = fopen(bufer, "r");
   int empty_line = 0;
-  while ((read2 = getline(&line2, &len2, file2)) != -1) {
-    FILE *file = fopen(argv[count], "r");
-    if (empty_line == 1) {
-      continue;
-    }
-    if (file != NULL) {
-      while ((read = getline(&line, &len, file)) != -1) {
-        if (line2[0] == 10 && line[0] == 10) {
-          printf("%s", line2);
-          empty_line = 1;
-          continue;
-        } else if (line2[0] == 10 && line[0] == 10) {
-          continue;
-        } else {
-          transformation(line, line2, &quantity, opt, &number, argc, argv,
-                         count, flag, &previous_is_empty);
-        }
+  if (file2 != NULL) {
+    while ((read2 = getline(&line2, &len2, file2)) != -1) {
+      FILE *file = fopen(argv[count], "r");
+      if (empty_line == 1) {
+        continue;
       }
-    } else {
-      fprintf(stderr, "No such file or directory\n");
-      free(line);
-      free(line2);
-      return;
+      if (file != NULL) {
+        while ((read = getline(&line, &len, file)) != -1) {
+          if (line2[0] == 10 && line[0] == 10) {
+            printf("%s", line2);
+            empty_line = 1;
+            continue;
+          } else if (line2[0] == 10 && line[0] == 10) {
+            continue;
+          } else {
+            transformation(line, line2, &quantity, opt, &number, argc, argv,
+                           count, flag, &previous_is_empty);
+          }
+        }
+      } else {
+        fprintf(stderr, "No such file or directory\n");
+        free(line);
+        free(line2);
+        return;
+      }
+      fclose(file);
     }
-    fclose(file);
   }
   fclose(file2);
   free(line);

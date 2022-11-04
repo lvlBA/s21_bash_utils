@@ -1,8 +1,11 @@
-FLAGS = -Wall -Wextra -Werror -lpcre
+GCC = gcc  -Wall -Werror -Wextra -std=c11 -D_GNU_SOURCE -lm
+
+
 all: s21_grep
 
 s21_grep: Makefile s21_grep.h s21_grep.c
-	gcc $(FLAGS) s21_grep.c -o s21_grep
+	 $(GCC) s21_grep.c -lpcre -c -o s21_grep.o
+	$(GCC) s21_grep.o -lpcre -o s21_grep
 
 check:
 	clang-format -style=Google -n *.c
@@ -15,4 +18,4 @@ rebuild:
 	make all
 
 clean:
-	rm -f s21_cat
+	rm -f s21_grep *.o

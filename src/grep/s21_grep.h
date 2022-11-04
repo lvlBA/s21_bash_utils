@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+// #define _GNU_SOURCE
 
 typedef struct options {
   int e, c, n, v, l, i, s, o, f, h;
