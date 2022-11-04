@@ -1,4 +1,4 @@
-GCC = gcc  -Wall -Werror -Wextra -std=c11 -D_GNU_SOURCE -lm
+GCC = gcc  -Wall -Werror -Wextra -std=c11 -lm
 
 
 all: s21_grep
@@ -11,7 +11,7 @@ check:
 	clang-format -style=Google -n *.c
 	
 test:
-	bash test.sh
+	sh test_func_grep.sh
 
 rebuild:
 	make clean

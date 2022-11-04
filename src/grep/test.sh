@@ -25,5 +25,4 @@ grep -s ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_THIRD} > ORIG.txt
 ./s21_grep -s ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_THIRD} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -f ${TEMPLATE_FILE} ${TEST_FILE} > ORIG.txt && ./s21_grep -f ${TEMPLATE_FILE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -o ${THE_THIRD_TEMPLATE} ${TEST_FILE} > ORIG.txt && ./s21_grep -o ${THE_THIRD_TEMPLATE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
-
 rm -f ORIG.txt MINE.txt

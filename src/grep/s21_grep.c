@@ -82,20 +82,20 @@ void feel_buffer(char **argv, struct options *opt, int argc, int flag) {
 void reader(char **argv, struct options *opt, int count, char *bufer, int argc,
             int flag) {
   FILE *file = fopen(argv[count], "r");
-  char *line = NULL;
-  size_t len = 0;
-  ssize_t read;
+  char line[8000] = {0};
+  char *read;
   int previous_is_enter = 999;
   int quantity = 0, number = 1;
   if (opt->f) {
     option_f(argv, opt, count, bufer, argc, flag);
   } else if (file != NULL) {
-    while ((read = getline(&line, &len, file)) != -1) {
+    while ((read = fgets(line, 7998, file))) {
       transformation(line, bufer, &quantity, opt, &number, argc, argv, count,
                      flag, &previous_is_enter);
       number++;
     }
-    if ((read == -1 && previous_is_enter == 0) &&
+
+    if ((read == NULL && previous_is_enter == 0) &&
         (opt->i || opt->h || opt->n || opt->e)) {
       printf("\n");
       previous_is_enter = 999;
@@ -106,9 +106,6 @@ void reader(char **argv, struct options *opt, int count, char *bufer, int argc,
     }
     if (opt->l && quantity >= 1) {
       printf("%s\n", argv[count]);
-    }
-    if (line) {
-      free(line);
     }
   } else {
     if (opt->s) {
@@ -240,20 +237,20 @@ void option_f(char **argv, struct options *opt, int count, char *bufer,
               int argc, int flag) {
   int quantity = 0, number = 1;
   int previous_is_empty;
-  char *line = NULL;
-  char *line2 = NULL;
-  ssize_t read, read2;
-  size_t len = 0, len2 = 0;
+  char *read, *read2;
+  char line[8000] = {0};
+  char line2[8000] = {0};
   FILE *file2 = fopen(bufer, "r");
   int empty_line = 0;
   if (file2 != NULL) {
-    while ((read2 = getline(&line2, &len2, file2)) != -1) {
+    while ((read2 = fgets(line2, 7998, file2))) {
       FILE *file = fopen(argv[count], "r");
+
       if (empty_line == 1) {
         continue;
       }
       if (file != NULL) {
-        while ((read = getline(&line, &len, file)) != -1) {
+        while ((read = fgets(line, 7998, file))) {
           if (line2[0] == 10 && line[0] == 10) {
             printf("%s", line2);
             empty_line = 1;
@@ -267,14 +264,10 @@ void option_f(char **argv, struct options *opt, int count, char *bufer,
         }
       } else {
         fprintf(stderr, "No such file or directory\n");
-        free(line);
-        free(line2);
         return;
       }
       fclose(file);
     }
   }
   fclose(file2);
-  free(line);
-  free(line2);
 }
