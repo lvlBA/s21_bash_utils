@@ -6,6 +6,9 @@ s21_grep: Makefile s21_grep.h s21_grep.c
 
 check:
 	clang-format -style=Google -n *.c
+	
+test:
+	bash test.sh
 
 rebuild:
 	make clean

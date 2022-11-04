@@ -16,38 +16,38 @@ void parser(int argc, char *argv[], struct options *opt) {
       flag += 1;
       while (for_flag != strlen(argv[count])) {
         switch (argv[count][for_flag]) {
-        case 'e':
-          opt->e = 1;
-          break;
-        case 'i':
-          opt->i = 1;
-          break;
-        case 'v':
-          opt->v = 1;
-          break;
-        case 'c':
-          opt->c = 1;
-          break;
-        case 'l':
-          opt->l = 1;
-          break;
-        case 'n':
-          opt->n = 1;
-          break;
-        case 'h':
-          opt->h = 1;
-          break;
-        case 's':
-          opt->s = 1;
-          break;
-        case 'f':
-          opt->f = 1;
-          break;
-        case 'o':
-          opt->o = 1;
-          break;
-        default:
-          fprintf(stderr, "usage: [-eivclnhsf_file] [file ...]");
+          case 'e':
+            opt->e = 1;
+            break;
+          case 'i':
+            opt->i = 1;
+            break;
+          case 'v':
+            opt->v = 1;
+            break;
+          case 'c':
+            opt->c = 1;
+            break;
+          case 'l':
+            opt->l = 1;
+            break;
+          case 'n':
+            opt->n = 1;
+            break;
+          case 'h':
+            opt->h = 1;
+            break;
+          case 's':
+            opt->s = 1;
+            break;
+          case 'f':
+            opt->f = 1;
+            break;
+          case 'o':
+            opt->o = 1;
+            break;
+          default:
+            fprintf(stderr, "usage: [-eivclnhsf_file] [file ...]");
         }
         for_flag++;
       }

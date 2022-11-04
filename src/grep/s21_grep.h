@@ -25,4 +25,4 @@ void option_v(char *line, char **argv, int count, int argc);
 void option_o(int argc, char **argv, char *line, int count, char *bufer);
 void option_f(char **argv, struct options *opt, int count, char *bufer,
               int argc, int flag);
-#endif // SRC_GREP_S21_GREP_H_
+#endif  // SRC_GREP_S21_GREP_H_
