@@ -21,7 +21,6 @@ void transformation(char *line, char *bufer, int *quantity, struct options *opt,
 void check_the_flag(struct options *opt);
 void feel_buffer(char **argv, struct options *opt, int argc, int flag);
 void option_c(int quantity, char **argv, int count, int argc);
-void option_n(char *line, char **argv, int count, int argc, int *number);
 void option_v(char *line, char **argv, int count, int argc);
 void option_o(int argc, char **argv, char *line, int count, char *bufer);
 void option_f(char **argv, struct options *opt, int count, char *bufer,

@@ -27,13 +27,13 @@ void parser(int argc, char *argv[], struct options *opt) {
           case 'v':
             opt->v = 1;
             break;
-          case 'c':
+          case 'c':  // kosyak posmotret
             opt->c = 1;
             break;
           case 'l':
             opt->l = 1;
             break;
-          case 'n':
+          case 'n':  // kosyak posmotret
             opt->n = 1;
             break;
           case 'h':
@@ -149,7 +149,12 @@ void transformation(char *line, char *bufer, int *quantity, struct options *opt,
       *previous_is_enter = line[strlen(line) - 1] == 10 ? 1 : 0;
     }
     if (opt->n) {
-      option_n(line, argv, count, argc, number);
+      if (argc == 4) {
+        printf("%d:%s", *number, line);
+      } else if (argc > 4) {
+        printf("%s:", argv[count]);
+        printf("%d:%s", *number, line);
+      }
       *previous_is_enter = line[strlen(line) - 1] == 10 ? 1 : 0;
     }
     if (opt->o && argc >= 4) {
@@ -182,15 +187,6 @@ void option_c(int quantity, char **argv, int count, int argc) {
   } else if (argc > 4) {
     printf("%s:", argv[count]);
     printf("%d\n", quantity);
-  }
-}
-
-void option_n(char *line, char **argv, int count, int argc, int *number) {
-  if (argc == 4) {
-    printf("%d:%s", *number, line);
-  } else if (argc > 4) {
-    printf("%s:", argv[count]);
-    printf("%d:%s", *number, line);
   }
 }
 

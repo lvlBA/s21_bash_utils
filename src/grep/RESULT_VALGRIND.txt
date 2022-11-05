@@ -1,0 +1,91 @@
+==38239== Memcheck, a memory error detector
+==38239== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==38239== Using Valgrind-3.19.0.GIT-lbmacos-6ff08b6e31-20220212 and LibVEX; rerun with -h for copyright info
+==38239== Command: ./s21_grep -n while s21_grep.c
+==38239== Parent PID: 38238
+==38239== 
+--38239-- 
+--38239-- Valgrind options:
+--38239--    --vgdb=no
+--38239--    --leak-check=full
+--38239--    --show-leak-kinds=all
+--38239--    --track-origins=yes
+--38239--    --verbose
+--38239--    --log-file=RESULT_VALGRIND.txt
+--38239-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--38239--   Darwin Kernel Version 20.6.0: Tue Apr 19 21:04:45 PDT 2022; root:xnu-7195.141.29~1/RELEASE_X86_64
+--38239-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--38239-- Page sizes: currently 4096, max supported 4096
+--38239-- Valgrind library directory: /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind
+--38239-- ./s21_grep (rx at 0x100000000, rw at 0x100004000)
+--38239--    reading syms   from primary file (11 1)
+--38239--    dSYM= ./s21_grep.dSYM/Contents/Resources/DWARF/s21_grep
+--38239--    dSYM does not have correct UUID (out of date?)
+--38239-- run: /usr/bin/dsymutil "./s21_grep"
+--38239--    dsyms= ./s21_grep.dSYM/Contents/Resources/DWARF/s21_grep
+--38239-- /usr/lib/dyld (rx at 0x100010000, rw at 0x1000ac000)
+--38239--    reading syms   from primary file (5 2905)
+--38239-- Scheduler: using generic scheduler lock implementation.
+--38239-- Reading suppressions file: /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp
+--38239-- REDIR: 0x100068c00 (dyld:strcmp) redirected to 0x258058676 (???)
+--38239-- REDIR: 0x100062b74 (dyld:arc4random) redirected to 0x258058714 (???)
+--38239-- REDIR: 0x100067fe0 (dyld:strlen) redirected to 0x258058645 (???)
+--38239-- REDIR: 0x100068f00 (dyld:strcpy) redirected to 0x258058692 (???)
+--38239-- REDIR: 0x100066017 (dyld:strcat) redirected to 0x258058656 (???)
+--38239-- REDIR: 0x100067dc7 (dyld:strlcat) redirected to 0x2580586af (???)
+==38239== Warning: set address range perms: large range [0x7fff200e1000, 0x80001fee1000) (defined)
+==38239== Warning: set address range perms: large range [0x7fff200e1000, 0x7fff7fa7d000) (defined)
+==38239== Warning: set address range perms: large range [0x7fff8e345000, 0x7fffc00e1000) (noaccess)
+==38239== Warning: set address range perms: large range [0x7fffc00e1000, 0x7fffe2fa5000) (defined)
+==38239== Warning: set address range perms: large range [0x7fffe2fa5000, 0x7fffffe00000) (noaccess)
+--38239-- /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x100128000, rw at 0x10012c000)
+--38239--    reading syms   from primary file (3 54)
+--38239--    dSYM= /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--38239-- /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x100134000, rw at 0x10013c000)
+--38239--    reading syms   from primary file (75 63)
+--38239--    dSYM= /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--38239-- /usr/local/lib/libpcre.1.dylib (rx at 0x100144000, rw at 0x1001b0000)
+--38239--    reading syms   from primary file (32 189)
+--38239-- /usr/local/lib/gcc/10/libgcc_s.1.dylib (rx at 0x1001bc000, rw at 0x1001d4000)
+--38239--    reading syms   from primary file (159 1243)
+==38239== Conditional jump or move depends on uninitialised value(s)
+==38239==    at 0x7FFF204328DF: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20300184: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20308E2B: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF2032D964: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20305FE5: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20304155: ??? (in /dev/ttys001)
+==38239==    by 0x100003532: transformation (in ./s21_grep)
+==38239==    by 0x100003095: reader (in ./s21_grep)
+==38239==    by 0x100002E6B: feel_buffer (in ./s21_grep)
+==38239==    by 0x100002DE1: parser (in ./s21_grep)
+==38239==    by 0x100002BE1: main (in ./s21_grep)
+==38239==  Uninitialised value was created by a stack allocation
+==38239==    at 0x7FFF203060CF: ??? (in /dev/ttys001)
+==38239== 
+==38239== 
+==38239== HEAP SUMMARY:
+==38239==     in use at exit: 0 bytes in 0 blocks
+==38239==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==38239== 
+==38239== All heap blocks were freed -- no leaks are possible
+==38239== 
+==38239== ERROR SUMMARY: 7 errors from 1 contexts (suppressed: 0 from 0)
+==38239== 
+==38239== 7 errors in context 1 of 1:
+==38239== Conditional jump or move depends on uninitialised value(s)
+==38239==    at 0x7FFF204328DF: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20300184: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20308E2B: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF2032D964: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20305FE5: ??? (in /dev/ttys001)
+==38239==    by 0x7FFF20304155: ??? (in /dev/ttys001)
+==38239==    by 0x100003532: transformation (in ./s21_grep)
+==38239==    by 0x100003095: reader (in ./s21_grep)
+==38239==    by 0x100002E6B: feel_buffer (in ./s21_grep)
+==38239==    by 0x100002DE1: parser (in ./s21_grep)
+==38239==    by 0x100002BE1: main (in ./s21_grep)
+==38239==  Uninitialised value was created by a stack allocation
+==38239==    at 0x7FFF203060CF: ??? (in /dev/ttys001)
+==38239== 
+==38239== ERROR SUMMARY: 7 errors from 1 contexts (suppressed: 0 from 0)

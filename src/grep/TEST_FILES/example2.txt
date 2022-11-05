@@ -5,10 +5,15 @@ this is the beginning of the file example2.txt
 666
 5555
 444
+
 333
+
 222
+
 111111
+
 000
+
 hello
 
 previous line is an empty line.
