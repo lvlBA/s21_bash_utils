@@ -158,6 +158,7 @@ void transformation(char *line, char *bufer, int *quantity, struct options *opt,
       }
       *previous_is_enter = line[strlen(line) - 1] == 10 ? 1 : 0;
     }
+
     if (opt->o && argc >= 4) {
       option_o(argc, argv, line, tmp, bufer);
     }

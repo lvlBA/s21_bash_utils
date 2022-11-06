@@ -6,7 +6,6 @@ TEMPLATE="[0-9]"
 THE_SECOND_TEMPLATE="hello"
 THE_THIRD_TEMPLATE="11"
 
-
 grep -e ${TEMPLATE} ${TEST_FILE} > ORIG.txt && ./s21_grep -e ${TEMPLATE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -e ${THE_THIRD_TEMPLATE} ${TEST_FILE} > ORIG.txt && ./s21_grep -e ${THE_THIRD_TEMPLATE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -e ${THE_THIRD_TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND}> ORIG.txt && ./s21_grep -e ${THE_THIRD_TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND} > MINE.txt && diff -s ORIG.txt MINE.txt
@@ -25,4 +24,5 @@ grep -s ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_THIRD} > ORIG.txt
 ./s21_grep -s ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_THIRD} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -f ${TEMPLATE_FILE} ${TEST_FILE} > ORIG.txt && ./s21_grep -f ${TEMPLATE_FILE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -o ${THE_THIRD_TEMPLATE} ${TEST_FILE} > ORIG.txt && ./s21_grep -o ${THE_THIRD_TEMPLATE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
+grep whil s21_grep.c s21_grep.h test_func_grep.sh > ORIG.txt && ./s21_grep whil s21_grep.c s21_grep.h test_func_grep.sh > MINE.txt && diff -s ORIG.txt MINE.txt
 rm -f ORIG.txt MINE.txt

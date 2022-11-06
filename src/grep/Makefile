@@ -26,7 +26,7 @@ install_valgrind:
 	brew install --HEAD LouisBrunner/valgrind/valgrind
 
 valgrind:
-	CK_FORK=no valgrind --undef-value-errors=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./s21_grep -n while s21_grep.c s21_grep.h
+	CK_FORK=no valgrind --undef-value-errors=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./s21_grep -e while s21_grep.c 
 
 
 rebuild:
