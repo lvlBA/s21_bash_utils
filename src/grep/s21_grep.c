@@ -107,13 +107,13 @@ void reader(char **argv, struct options *opt, int tmp, char *bufer, int argc,
     if (opt->l && quantity >= 1) {
       printf("%s\n", argv[tmp]);
     }
+    fclose(file);
   } else {
     if (opt->s) {
       return;
     }
     fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
   }
-  fclose(file);
 }
 
 void transformation(char *line, char *bufer, int *quantity, struct options *opt,
