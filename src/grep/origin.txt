@@ -1,0 +1,7 @@
+16:  while (count != argc) {
+19:      while (for_flag != strlen(argv[count])) {
+66:  while (tmp != argc) {
+71:      while (counter != strlen(argv[tmp])) {
+92:    while ((read = fgets(line, 7998, file))) {
+242:    while ((read2 = fgets(line2, 7998, file2))) {
+249:        while ((read = fgets(line, 7998, file))) {

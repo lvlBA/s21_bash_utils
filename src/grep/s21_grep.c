@@ -27,7 +27,7 @@ void parser(int argc, char *argv[], struct options *opt) {
           case 'v':
             opt->v = 1;
             break;
-          case 'c':  // kosyak posmotret
+          case 'c':
             opt->c = 1;
             break;
           case 'l':
@@ -60,7 +60,7 @@ void parser(int argc, char *argv[], struct options *opt) {
 }
 
 void feel_buffer(char **argv, struct options *opt, int argc, int flag) {
-  char *bufer = NULL;
+  char *bufer = malloc(1 * sizeof(char));
   int tmp = 1;
   size_t counter = 0;
   while (tmp != argc) {
@@ -79,18 +79,18 @@ void feel_buffer(char **argv, struct options *opt, int argc, int flag) {
   free(bufer);
 }
 
-void reader(char **argv, struct options *opt, int count, char *bufer, int argc,
+void reader(char **argv, struct options *opt, int tmp, char *bufer, int argc,
             int flag) {
-  FILE *file = fopen(argv[count], "r");
+  FILE *file = fopen(argv[tmp], "r");
   char line[8000] = {0};
-  char *read;
+  char *read = NULL;
   int previous_is_enter = 999;
   int quantity = 0, number = 1;
   if (opt->f) {
-    option_f(argv, opt, count, bufer, argc, flag);
+    option_f(argv, opt, tmp, bufer, argc, flag);
   } else if (file != NULL) {
     while ((read = fgets(line, 7998, file))) {
-      transformation(line, bufer, &quantity, opt, &number, argc, argv, count,
+      transformation(line, bufer, &quantity, opt, &number, argc, argv, tmp,
                      flag, &previous_is_enter);
       number++;
     }
@@ -102,30 +102,31 @@ void reader(char **argv, struct options *opt, int count, char *bufer, int argc,
     }
 
     if (opt->c) {
-      option_c(quantity, argv, count, argc);
+      option_c(quantity, argv, tmp, argc);
     }
     if (opt->l && quantity >= 1) {
-      printf("%s\n", argv[count]);
+      printf("%s\n", argv[tmp]);
     }
   } else {
     if (opt->s) {
+      fclose(file);
       return;
     }
-    fprintf(stderr, "%s: No such file or directory\n", argv[count]);
+    fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
   }
   fclose(file);
 }
 
 void transformation(char *line, char *bufer, int *quantity, struct options *opt,
-                    int *number, int argc, char **argv, int count, int flag,
+                    int *number, int argc, char **argv, int tmp, int flag,
                     int *previous_is_enter) {
   pcre *f;                  /* variable to store transformated sample */
   pcre_extra *f_ext = NULL; /* variable to store additional data */
   const char *errstr;       /* error message buffer */
-  int errchar;              /* number of sym */
+  int errchar = 0;          /* number of sym */
   int vector[8000];         /* array for result */
   int vecsize = 8000;       /* size of array */
-  int pairs;                /* q-ty pairs */
+  int pairs = 0;            /* q-ty pairs */
   if (opt->i) {
     f = pcre_compile(bufer, PCRE_CASELESS | PCRE_MULTILINE, &errstr, &errchar,
                      NULL);
@@ -141,7 +142,7 @@ void transformation(char *line, char *bufer, int *quantity, struct options *opt,
       *previous_is_enter = line[strlen(line) - 1] == 10 ? 1 : 0;
     } else if (((opt->e || opt->i) && argc >= 4 && flag == 0) ||
                ((opt->e || opt->i) && argc > 4 && flag == 1)) {
-      printf("%s:", argv[count]);
+      printf("%s:", argv[tmp]);
       printf("%s", line);
       *previous_is_enter = line[strlen(line) - 1] == 10 ? 1 : 0;
     } else if (((!opt->e || opt->i) && argc >= 4 && flag == 1) && (opt->h)) {
@@ -152,17 +153,17 @@ void transformation(char *line, char *bufer, int *quantity, struct options *opt,
       if (argc == 4) {
         printf("%d:%s", *number, line);
       } else if (argc > 4) {
-        printf("%s:", argv[count]);
+        printf("%s:", argv[tmp]);
         printf("%d:%s", *number, line);
       }
       *previous_is_enter = line[strlen(line) - 1] == 10 ? 1 : 0;
     }
     if (opt->o && argc >= 4) {
-      option_o(argc, argv, line, count, bufer);
+      option_o(argc, argv, line, tmp, bufer);
     }
   } else {
     if (opt->v) {
-      option_v(line, argv, count, argc);
+      option_v(line, argv, tmp, argc);
     }
   }
   free(f);
@@ -181,16 +182,18 @@ void check_the_flag(struct options *opt) {
   }
 }
 
-void option_c(int quantity, char **argv, int count, int argc) {
+void option_c(int quantity, char **argv, int tmp, int argc) {
   if (argc == 4) {
-    printf("%d\n", quantity);
+    option(quantity);
   } else if (argc > 4) {
-    printf("%s:", argv[count]);
+    printf("%s:", argv[tmp]);
     printf("%d\n", quantity);
   }
 }
 
-void option_v(char *line, char **argv, int count, int argc) {
+void option(int quantity) { printf("%d\n", quantity); }
+
+void option_v(char *line, char **argv, int tmp, int argc) {
   int x = strlen(line);
   if (argc == 4) {
     printf("%s", line);
@@ -198,7 +201,7 @@ void option_v(char *line, char **argv, int count, int argc) {
       printf("\n");
     }
   } else if (argc > 4) {
-    printf("%s:", argv[count]);
+    printf("%s:", argv[tmp]);
     printf("%s", line);
     if (line[x - 1] != 10) {
       printf("\n");
@@ -206,7 +209,7 @@ void option_v(char *line, char **argv, int count, int argc) {
   }
 }
 
-void option_o(int argc, char **argv, char *line, int count, char *bufer) {
+void option_o(int argc, char **argv, char *line, int tmp, char *bufer) {
   int flag_print_fail = 0, schet = 0;
   int qntity = strlen(bufer);
   for (long unsigned int i = 0; i < strlen(line); i++) {
@@ -217,7 +220,7 @@ void option_o(int argc, char **argv, char *line, int count, char *bufer) {
     }
     if (schet == qntity) {
       if (flag_print_fail == 0 && argc > 4) {
-        printf("%s:", argv[count]);
+        printf("%s:", argv[tmp]);
         printf("%s\n", bufer);
         flag_print_fail = 1;
         schet = 0;

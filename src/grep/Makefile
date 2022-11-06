@@ -1,11 +1,11 @@
-GCC = gcc  -Wall -Werror -Wextra -std=c11 -lm
+GCC = gcc  -Wall -Werror -Wextra -std=c11 -lm -lpcre
 
 
 all: s21_grep
 
 s21_grep: Makefile s21_grep.h s21_grep.c
-	$(GCC) s21_grep.c -lpcre -c -o s21_grep.o
-	$(GCC) s21_grep.o -lpcre -o s21_grep
+	$(GCC) s21_grep.c -c -o s21_grep.o -lpcre
+	$(GCC) s21_grep.o -o s21_grep -lpcre 
 
 check:
 	clang-format -style=Google -n *.c
@@ -26,7 +26,7 @@ install_valgrind:
 	brew install --HEAD LouisBrunner/valgrind/valgrind
 
 valgrind:
-	CK_FORK=no valgrind  --vgdb=no --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./s21_grep -n while s21_grep.c 
+	CK_FORK=no valgrind --undef-value-errors=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./s21_grep -n while s21_grep.c s21_grep.h
 
 
 rebuild:
