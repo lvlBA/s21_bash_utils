@@ -20,7 +20,7 @@ test: clean all
 leaks: clean all
 	sh test_leak_grep.sh
 
-valgrind: clean
+valgrind: clean all
 	bash test_ERROR_VALGRIND.sh
 
 rebuild: clean all
