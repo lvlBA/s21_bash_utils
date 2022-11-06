@@ -1,0 +1,55 @@
+==25363== Memcheck, a memory error detector
+==25363== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==25363== Using Valgrind-3.19.0.GIT-lbmacos-6ff08b6e31-20220212 and LibVEX; rerun with -h for copyright info
+==25363== Command: ./s21_grep -l no_file.txt
+==25363== Parent PID: 22813
+==25363== 
+--25363-- 
+--25363-- Valgrind options:
+--25363--    --vgdb=no
+--25363--    --leak-check=full
+--25363--    --show-leak-kinds=all
+--25363--    --track-origins=yes
+--25363--    --verbose
+--25363--    --log-file=RESULT_VALGRIND.txt
+--25363-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--25363--   Darwin Kernel Version 20.6.0: Tue Apr 19 21:04:45 PDT 2022; root:xnu-7195.141.29~1/RELEASE_X86_64
+--25363-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--25363-- Page sizes: currently 4096, max supported 4096
+--25363-- Valgrind library directory: /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind
+--25363-- ./s21_grep (rx at 0x100000000, rw at 0x100004000)
+--25363--    reading syms   from primary file (12 1)
+--25363--    dSYM= ./s21_grep.dSYM/Contents/Resources/DWARF/s21_grep
+--25363-- /usr/lib/dyld (rx at 0x100010000, rw at 0x1000ac000)
+--25363--    reading syms   from primary file (5 2905)
+--25363-- Scheduler: using generic scheduler lock implementation.
+--25363-- Reading suppressions file: /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp
+--25363-- REDIR: 0x100068c00 (dyld:strcmp) redirected to 0x258058676 (???)
+--25363-- REDIR: 0x100062b74 (dyld:arc4random) redirected to 0x258058714 (???)
+--25363-- REDIR: 0x100067fe0 (dyld:strlen) redirected to 0x258058645 (???)
+--25363-- REDIR: 0x100068f00 (dyld:strcpy) redirected to 0x258058692 (???)
+--25363-- REDIR: 0x100066017 (dyld:strcat) redirected to 0x258058656 (???)
+--25363-- REDIR: 0x100067dc7 (dyld:strlcat) redirected to 0x2580586af (???)
+==25363== Warning: set address range perms: large range [0x7fff20529000, 0x800020329000) (defined)
+==25363== Warning: set address range perms: large range [0x7fff20853000, 0x7fff7fec5000) (defined)
+==25363== Warning: set address range perms: large range [0x7fff8e78d000, 0x7fffc0529000) (noaccess)
+==25363== Warning: set address range perms: large range [0x7fffc0529000, 0x7fffe33ed000) (defined)
+==25363== Warning: set address range perms: large range [0x7fffe33ed000, 0x7fffffe00000) (noaccess)
+--25363-- /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x100128000, rw at 0x10012c000)
+--25363--    reading syms   from primary file (3 54)
+--25363--    dSYM= /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--25363-- /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x100134000, rw at 0x10013c000)
+--25363--    reading syms   from primary file (75 63)
+--25363--    dSYM= /Users/bernardi/.brew/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--25363-- /usr/local/lib/libpcre.1.dylib (rx at 0x100144000, rw at 0x1001b0000)
+--25363--    reading syms   from primary file (32 189)
+--25363-- /usr/local/lib/gcc/10/libgcc_s.1.dylib (rx at 0x1001bc000, rw at 0x1001d4000)
+--25363--    reading syms   from primary file (159 1243)
+==25363== 
+==25363== HEAP SUMMARY:
+==25363==     in use at exit: 0 bytes in 0 blocks
+==25363==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==25363== 
+==25363== All heap blocks were freed -- no leaks are possible
+==25363== 
+==25363== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

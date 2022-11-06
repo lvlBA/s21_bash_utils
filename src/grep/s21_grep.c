@@ -88,33 +88,31 @@ void reader(char **argv, struct options *opt, int tmp, char *bufer, int argc,
   int quantity = 0, number = 1;
   if (opt->f) {
     option_f(argv, opt, tmp, bufer, argc, flag);
-  } else {
-    if (file != NULL) {
-      while ((read = fgets(line, 7998, file))) {
-        transformation(line, bufer, &quantity, opt, &number, argc, argv, tmp,
-                       flag, &previous_is_enter);
-        number++;
-      }
-
-      if ((read == NULL && previous_is_enter == 0) &&
-          (opt->i || opt->h || opt->n || opt->e)) {
-        printf("\n");
-        previous_is_enter = 999;
-      }
-
-      if (opt->c) {
-        option_c(quantity, argv, tmp, argc);
-      }
-      if (opt->l && quantity >= 1) {
-        printf("%s\n", argv[tmp]);
-      }
-    } else {
-      if (opt->s) {
-        fclose(file);
-        return;
-      }
-      fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
+  } else if (file != NULL) {
+    while ((read = fgets(line, 7998, file))) {
+      transformation(line, bufer, &quantity, opt, &number, argc, argv, tmp,
+                     flag, &previous_is_enter);
+      number++;
     }
+
+    if ((read == NULL && previous_is_enter == 0) &&
+        (opt->i || opt->h || opt->n || opt->e)) {
+      printf("\n");
+      previous_is_enter = 999;
+    }
+
+    if (opt->c) {
+      option_c(quantity, argv, tmp, argc);
+    }
+    if (opt->l && quantity >= 1) {
+      printf("%s\n", argv[tmp]);
+    }
+  } else {
+    if (opt->s) {
+      fclose(file);
+      return;
+    }
+    fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
   }
   fclose(file);
 }
