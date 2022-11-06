@@ -40,7 +40,7 @@ declare -a extra=(
 "-n out ${TEMPLATE_FILE6}"
 "-i int ${TEMPLATE_FILE6}"
 "-i int ${TEMPLATE_FILE6}"
-"-c aboba test_1.txt ${TEMPLATE_FILE6}"
+"-c aboba ${TEMPLATE_FILE2} ${TEMPLATE_FILE6}"
 "-v ${TEMPLATE_FILE2} ank"
 "-n ) ${TEMPLATE_FILE6}"
 "-l for ${TEMPLATE_FILE2} ${TEMPLATE_FILE4}"
