@@ -109,7 +109,6 @@ void reader(char **argv, struct options *opt, int tmp, char *bufer, int argc,
     }
   } else {
     if (opt->s) {
-      // fclose(file);
       return;
     }
     fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
