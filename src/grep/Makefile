@@ -7,22 +7,23 @@ s21_grep: Makefile s21_grep.h s21_grep.c
 	$(GCC) s21_grep.c -c -o s21_grep.o -lpcre
 	$(GCC) s21_grep.o -o s21_grep -lpcre 
 
-check:
-	clang-format -style=Google -n *.c
+check: clean all
+	cp ../../materials/linters/.clang-format ../../src/.clang-format
+	clang-format -style=Google -n s21_grep.c s21_grep.h
+	rm ../.clang-format
 	
-test:
+test: clean all
 	bash test.sh
 	sh test_func_grep.sh
+	make clean
 
-leaks:
+leaks: clean all
 	sh test_leak_grep.sh
 
-valgrind:
+valgrind: clean
 	bash test_ERROR_VALGRIND.sh
 
-rebuild:
-	make clean
-	make all
+rebuild: clean all
 
 clean:
-	rm -f s21_grep *.o
+	rm -rf s21_grep s21_grep.dSYM *.o

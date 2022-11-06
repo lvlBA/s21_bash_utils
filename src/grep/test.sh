@@ -19,7 +19,8 @@ grep -l ${TEMPLATE} ${TEST_FILE} > ORIG.txt && ./s21_grep -l ${TEMPLATE} ${TEST_
 grep -l ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND}> ORIG.txt && ./s21_grep -l ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND}> MINE.txt && diff -s ORIG.txt MINE.txt
 grep -n ${TEMPLATE} ${TEST_FILE} > ORIG.txt && ./s21_grep -n ${TEMPLATE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -n ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND}> ORIG.txt && ./s21_grep -n ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND}> MINE.txt && diff -s ORIG.txt MINE.txt
-grep -h ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND} > ORIG.txt && ./s21_grep -h ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_SECOND} > MINE.txt && diff -s ORIG.txt MINE.txt
+grep -h ${THE_SECOND_TEMPLATE} ${TEST_FILE} nofile.txt > ORIG.txt 
+./s21_grep -h ${THE_SECOND_TEMPLATE} ${TEST_FILE} nofile.txt > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -s ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_THIRD} > ORIG.txt
 ./s21_grep -s ${TEMPLATE} ${TEST_FILE} ${TEST_FILE_THIRD} > MINE.txt && diff -s ORIG.txt MINE.txt
 grep -f ${TEMPLATE_FILE} ${TEST_FILE} > ORIG.txt && ./s21_grep -f ${TEMPLATE_FILE} ${TEST_FILE} > MINE.txt && diff -s ORIG.txt MINE.txt

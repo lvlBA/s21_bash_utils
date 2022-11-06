@@ -5,8 +5,9 @@ s21_cat: Makefile s21_cat.h s21_cat.c
 	gcc $(FLAGS) s21_cat.c -o s21_cat
 
 check:
-	clang-format -style=Google -n *.c *.h
-
+	cp ../../materials/linters/.clang-format ../../src/.clang-format
+	clang-format -style=Google -n s21_cat.c s21_cat.h
+	rm ../.clang-format
 test:
 	sh test_func_cat.sh
 
@@ -18,4 +19,4 @@ rebuild:
 	make all
 
 clean:
-	rm -f s21_cat
+	rm -rf s21_cat

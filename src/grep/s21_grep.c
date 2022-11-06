@@ -33,7 +33,7 @@ void parser(int argc, char *argv[], struct options *opt) {
           case 'l':
             opt->l = 1;
             break;
-          case 'n':  // kosyak posmotret
+          case 'n':
             opt->n = 1;
             break;
           case 'h':
@@ -109,10 +109,9 @@ void reader(char **argv, struct options *opt, int tmp, char *bufer, int argc,
     }
     fclose(file);
   } else {
-    if (opt->s) {
-      return;
+    if (!opt->s) {
+      fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
     }
-    fprintf(stderr, "%s: No such file or directory\n", argv[tmp]);
   }
 }
 
