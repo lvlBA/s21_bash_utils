@@ -14,7 +14,7 @@ check: clean all
 	
 test: clean all
 	bash test.sh
-	sh test_func_grep.sh
+	bash test_func_grep.sh
 	make clean
 
 leaks: clean all
